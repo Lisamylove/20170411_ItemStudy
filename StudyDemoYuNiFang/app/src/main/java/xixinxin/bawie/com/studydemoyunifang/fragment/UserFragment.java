@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import xixinxin.bawie.com.studydemoyunifang.R;
@@ -14,11 +15,29 @@ import xixinxin.bawie.com.studydemoyunifang.R;
  * 1:姓名  席鑫鑫
  * 2:时间  2017/4/13 20:18
  */
-public class UserFragment extends Fragment {
+public class UserFragment extends Fragment implements View.OnClickListener {
+
+    private ImageView iv_setting;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.userfragment, null);
+        initView(view);//找控件
         return view;
+    }
+
+    private void initView(View view) {
+        iv_setting = (ImageView) view.findViewById(R.id.iv_setting);
+        iv_setting.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_setting:
+
+                break;
+        }
     }
 }

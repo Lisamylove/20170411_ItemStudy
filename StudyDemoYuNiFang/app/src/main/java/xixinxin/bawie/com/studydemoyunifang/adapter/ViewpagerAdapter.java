@@ -1,6 +1,7 @@
 package xixinxin.bawie.com.studydemoyunifang.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import xixinxin.bawie.com.studydemoyunifang.activity.ViewPagerActivity;
 import xixinxin.bawie.com.studydemoyunifang.bean.FirstPageBean;
 
 /**
@@ -41,9 +43,17 @@ public class ViewpagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         ImageView imageView = new ImageView(context);
         Picasso.with(context).load(data1.getAd1().get(position % (data1.getAd1().size())).getImage()).into(imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(context, ViewPagerActivity.class);
+                it.putExtra("url", data1.getAd1().get(position % (data1.getAd1().size())).getAd_type_dynamic_data());
+                context.startActivity(it);
+            }
+        });
         container.addView(imageView);
         return imageView;
     }

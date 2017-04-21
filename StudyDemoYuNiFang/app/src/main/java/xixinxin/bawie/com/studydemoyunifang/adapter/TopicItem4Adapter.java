@@ -1,7 +1,9 @@
 package xixinxin.bawie.com.studydemoyunifang.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import xixinxin.bawie.com.studydemoyunifang.R;
+import xixinxin.bawie.com.studydemoyunifang.activity.SubjectActivity;
 import xixinxin.bawie.com.studydemoyunifang.bean.FirstPageBean;
 
 /**
@@ -19,11 +22,11 @@ import xixinxin.bawie.com.studydemoyunifang.bean.FirstPageBean;
  */
 public class TopicItem4Adapter extends RecyclerView.Adapter {
     private Context context;
-    private FirstPageBean.DataBean data;
+    private FirstPageBean.DataBean.SubjectsBean data;
 
-    public TopicItem4Adapter(Context context, FirstPageBean.DataBean data) {
+    public TopicItem4Adapter(Context context, FirstPageBean.DataBean.SubjectsBean subjectsBean) {
         this.context = context;
-        this.data = data;
+        this.data = subjectsBean;
     }
 
     @Override
@@ -40,26 +43,35 @@ public class TopicItem4Adapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyViewHolder1) {
-            ((MyViewHolder1) holder).tv_hot3.setText("￥" + data.getSubjects().get(position).getGoodsList().get(position).getMarket_price());
+            ((MyViewHolder1) holder).tv_hot3.setText("￥" + data.getGoodsList().get(position).getMarket_price());
             ((MyViewHolder1) holder).tv_hot3.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            ((MyViewHolder1) holder).tv_hot2.setText("￥" + data.getSubjects().get(position).getGoodsList().get(position).getShop_price());
-            ((MyViewHolder1) holder).tv_hot1.setText(data.getSubjects().get(position).getGoodsList().get(position).getGoods_name());
-            Picasso.with(context).load(data.getSubjects().get(position).getGoodsList().get(position).getGoods_img()).into(((MyViewHolder1) holder).iv_hot1);
-        } else {
-
+            ((MyViewHolder1) holder).tv_hot2.setText("￥" + data.getGoodsList().get(position).getShop_price());
+            ((MyViewHolder1) holder).tv_hot1.setText(data.getGoodsList().get(position).getGoods_name());
+            Picasso.with(context).load(data.getGoodsList().get(position).getGoods_img()).into(((MyViewHolder1) holder).iv_hot1);
+        } else if (holder instanceof MyViewHolder2){
+            ((MyViewHolder2) holder).iv_more.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it=new Intent(context, SubjectActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("data",data);
+                    it.putExtras(bundle);
+                    context.startActivity(it);
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return data.getSubjects().get(0).getShow_number() + 1;
+        return data.getShow_number() + 1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == data.getSubjects().get(0).getShow_number()) {
+        if (position == data.getShow_number()) {
             return 2;
         } else {
             return 1;
@@ -83,8 +95,11 @@ public class TopicItem4Adapter extends RecyclerView.Adapter {
 
     public static class MyViewHolder2 extends RecyclerView.ViewHolder {
 
+        private final ImageView iv_more;
+
         public MyViewHolder2(View itemView) {
             super(itemView);
+            iv_more = (ImageView) itemView.findViewById(R.id.iv_more);
         }
     }
 }

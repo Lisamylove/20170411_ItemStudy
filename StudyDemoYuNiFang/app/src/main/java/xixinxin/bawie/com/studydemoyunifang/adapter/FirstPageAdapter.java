@@ -1,6 +1,7 @@
 package xixinxin.bawie.com.studydemoyunifang.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -16,15 +17,14 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import xixinxin.bawie.com.studydemoyunifang.R;
+import xixinxin.bawie.com.studydemoyunifang.activity.WebViewActivity;
 import xixinxin.bawie.com.studydemoyunifang.bean.FirstPageBean;
-import xixinxin.bawie.com.studydemoyunifang.decoration.DividerItemDecortion;
-import xixinxin.bawie.com.studydemoyunifang.view.MyGridView;
 
 /**
  * 1:姓名  席鑫鑫
  * 2:时间  2017/4/14 18:37
  */
-public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private Context context;
     private FirstPageBean.DataBean data1;
     private Handler handler;
@@ -39,18 +39,6 @@ public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (viewType == 1) {
             View view = View.inflate(context, R.layout.item1, null);
             final MyViewHolder1 holder1 = new MyViewHolder1(view);
-            //重新设置给viewpager
-            handler = new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                    if (msg.what == 0) {
-                        int current = (int) msg.obj;
-                        current++;
-                        holder1.viewpager.setCurrentItem(current);
-                    }
-                }
-            };
             return holder1;
         } else if (viewType == 2) {
             View view = View.inflate(context, R.layout.item2, null);
@@ -76,19 +64,26 @@ public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyViewHolder1) {
             ((MyViewHolder1) holder).viewpager.setAdapter(new ViewpagerAdapter(context, data1));
+            //重新设置给viewpager
+            handler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    if (msg.what == 0) {
+                        int current = ((MyViewHolder1) holder).viewpager.getCurrentItem();
+                        ((MyViewHolder1) holder).viewpager.setCurrentItem(current + 1);
+                        handler.sendEmptyMessageDelayed(0, 5000);
+                    }
+                }
+            };
             new Thread() {
                 @Override
                 public void run() {
-                    while (true) {
-                        int item = ((MyViewHolder1) holder).viewpager.getCurrentItem();
-                        Message message = Message.obtain();
-                        message.what = 0;
-                        message.obj = item;
-                        handler.sendMessageDelayed(message, 2000);
-                    }
+                    handler.sendEmptyMessageDelayed(0, 5000);
                 }
             }.start();
             Picasso.with(context).load(data1.getAd5().get(0).getImage()).into(((MyViewHolder1) holder).iv_day);
+            enter((MyViewHolder1) holder);
             Picasso.with(context).load(data1.getAd5().get(1).getImage()).into(((MyViewHolder1) holder).iv_integral);
             Picasso.with(context).load(data1.getAd5().get(2).getImage()).into(((MyViewHolder1) holder).iv_chage);
             Picasso.with(context).load(data1.getAd5().get(3).getImage()).into(((MyViewHolder1) holder).iv_selector);
@@ -109,12 +104,19 @@ public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((MyVIewHolder4) holder).tv_item4.setText("-- " + "热门专题" + " --");
             ((MyVIewHolder4) holder).item4_lv.setAdapter(new TopicAdapter(context, data1));
         } else if (holder instanceof MyVIewHolder5) {
-            MyGridView gridView = new MyGridView(context, 2);
+            GridLayoutManager gridView = new GridLayoutManager(context, 2);
             ((MyVIewHolder5) holder).rv.setLayoutManager(gridView);
 //            DividerItemDecortion decortion=new DividerItemDecortion(context,2);
 //            ((MyVIewHolder5) holder).rv.addItemDecoration(decortion);
             ((MyVIewHolder5) holder).rv.setAdapter(new GridAdapter(context, data1));
         }
+    }
+
+    private void enter(MyViewHolder1 holder) {
+        holder.iv_day.setOnClickListener(this);
+        holder.iv_integral.setOnClickListener(this);
+        holder.iv_chage.setOnClickListener(this);
+        holder.iv_selector.setOnClickListener(this);
     }
 
     @Override
@@ -137,6 +139,32 @@ public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 return 5;
         }
         return 0;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_day:
+                Intent it = new Intent(context, WebViewActivity.class);
+                it.putExtra("result", data1.getAd5().get(0).getAd_type_dynamic_data());
+                context.startActivity(it);
+                break;
+            case R.id.iv_integral:
+                Intent it1 = new Intent(context, WebViewActivity.class);
+                it1.putExtra("result", data1.getAd5().get(1).getAd_type_dynamic_data());
+                context.startActivity(it1);
+                break;
+            case R.id.iv_chage:
+                Intent it2 = new Intent(context, WebViewActivity.class);
+                it2.putExtra("result", data1.getAd5().get(2).getAd_type_dynamic_data());
+                context.startActivity(it2);
+                break;
+            case R.id.iv_selector:
+                Intent it3 = new Intent(context, WebViewActivity.class);
+                it3.putExtra("result", data1.getAd5().get(3).getAd_type_dynamic_data());
+                context.startActivity(it3);
+                break;
+        }
     }
 
     public static class MyViewHolder1 extends RecyclerView.ViewHolder {

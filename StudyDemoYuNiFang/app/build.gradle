@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "xixinxin.bawie.com.studydemoyunifang"
-        minSdkVersion 19
+        minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -28,5 +28,8 @@ dependencies {
     compile 'com.liaoinstan.springview:library:1.2.6'
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile 'com.squareup.picasso:picasso:2.5.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.loopj.android:android-async-http:1.4.9'
     compile files('libs/gson-2.2.4.jar')
+    compile project(':libzxing')
 }
