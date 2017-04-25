@@ -23,7 +23,12 @@
         <activity android:name=".activity.ViewPagerActivity" />
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.MemberActivity" />
-        <activity android:name=".activity.SubjectActivity"></activity>
+        <activity android:name=".activity.SubjectActivity" />
+        <activity android:name=".activity.ParticularsActivity" />
+        <activity android:name=".activity.ClassityActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ZhuCeActivity" />
+        <activity android:name=".activity.SureActivity"></activity>
     </application>
 
 </manifest>

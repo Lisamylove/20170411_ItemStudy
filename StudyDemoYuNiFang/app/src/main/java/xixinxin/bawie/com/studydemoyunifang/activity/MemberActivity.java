@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +34,13 @@ public class MemberActivity extends AppCompatActivity {
         String result = it.getStringExtra("result");
         tv_member.setText(result + "");
         lv_member.setAdapter(new MemberAdapter(MemberActivity.this, bean));
+//        lv_member.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent it=new Intent(MemberActivity.this,ParticularsActivity.class);
+//                startActivity(it);
+//            }
+//        });
     }
 
     private void initView() {

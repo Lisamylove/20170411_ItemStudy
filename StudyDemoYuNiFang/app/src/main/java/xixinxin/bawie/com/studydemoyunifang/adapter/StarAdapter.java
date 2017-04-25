@@ -20,11 +20,11 @@ import xixinxin.bawie.com.studydemoyunifang.bean.ClassityBean;
 public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder> {
     private Context context;
 //    private String jsonurl = "http://m.yunifang.com/yunifang/mobile/category/list?random=96333&encode=bf3386e14fe5bb0bcef234baebca2414";
-    private List<ClassityBean.DataBean.GoodsBriefBean> goods;
+private ClassityBean.DataBean data;
 
-    public StarAdapter(Context context, List<ClassityBean.DataBean.GoodsBriefBean> goods) {
+    public StarAdapter(Context context, ClassityBean.DataBean data) {
         this.context = context;
-        this.goods = goods;
+        this.data = data;
     }
 
     @Override
@@ -36,17 +36,17 @@ public class StarAdapter extends RecyclerView.Adapter<StarAdapter.StarViewHolder
 
     @Override
     public void onBindViewHolder(StarViewHolder holder, int position) {
-        Picasso.with(context).load(goods.get(position).getGoods_img()).into(holder.image_grid);
-        holder.text_title.setText(goods.get(position).getEfficacy());
-        holder.text_goodsname.setText(goods.get(position).getGoods_name());
-        holder.text_price.setText("￥" + goods.get(position).getShop_price());
+        Picasso.with(context).load(data.getGoodsBrief().get(position).getGoods_img()).into(holder.image_grid);
+        holder.text_title.setText(data.getGoodsBrief().get(position).getEfficacy());
+        holder.text_goodsname.setText(data.getGoodsBrief().get(position).getGoods_name());
+        holder.text_price.setText("￥" + data.getGoodsBrief().get(position).getShop_price());
         holder.text_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        holder.text_market_price.setText("￥" + goods.get(position).getMarket_price());
+        holder.text_market_price.setText("￥" + data.getGoodsBrief().get(position).getMarket_price());
     }
 
     @Override
     public int getItemCount() {
-        return goods.size();
+        return data.getGoodsBrief().size();
     }
 
     public static class StarViewHolder extends RecyclerView.ViewHolder {

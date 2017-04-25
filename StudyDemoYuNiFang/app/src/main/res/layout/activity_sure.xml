@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@mipmap/back_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center"
+            android:text="确认订单"
+            android:textSize="23dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="#CFD2D1"></LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+    <ImageView
+        android:src="@mipmap/address"
+        android:layout_margin="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+    <EditText
+        android:layout_weight="1"
+        android:hint="请填写收货地址"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/order_confirm_next_icon" />
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="#CFD2D1"></LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_sure"
+                android:layout_margin="20dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:text="ghghghghg"
+                    android:textSize="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:text="jiage"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:text="购买数量"
+                        android:layout_marginTop="10dp"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_count"
+                        android:text="jiage"
+                        android:textColor="#FF4081"
+                        android:layout_marginTop="10dp"
+                        android:textSize="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="支付方式"
+            android:layout_margin="20dp"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <ImageView
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/icon_alipay"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:text="支付宝"
+                android:textSize="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <ImageView
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/icon_wxpay"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:text="微信支付"
+                android:textSize="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="实付"
+            android:textSize="20dp"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" /><TextView
+        android:layout_width="0dp"
+        android:text="dfg"
+        android:layout_weight="1"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content" />
+        <Button
+            android:text="提交订单"
+            android:textSize="20dp"
+            android:background="@mipmap/bg_medley_succee_left"
+            android:layout_width="120dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    </LinearLayout>

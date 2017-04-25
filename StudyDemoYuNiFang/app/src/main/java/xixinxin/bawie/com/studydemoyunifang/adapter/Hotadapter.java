@@ -23,10 +23,21 @@ import xixinxin.bawie.com.studydemoyunifang.bean.FirstPageBean;
 public class Hotadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private FirstPageBean.DataBean data;
+    //声明接口
+    public OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     public Hotadapter(Context context, FirstPageBean.DataBean data) {
         this.context = context;
         this.data = data;
+    }
+
+    //定义接口
+    public static interface OnItemClickListener {
+        void OnItemClickListener(View view, int position);
     }
 
     @Override
@@ -43,20 +54,29 @@ public class Hotadapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyViewHolder1) {
             ((MyViewHolder1) holder).tv_hot3.setText("￥" + data.getBestSellers().get(0).getGoodsList().get(position).getMarket_price());
             ((MyViewHolder1) holder).tv_hot3.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             ((MyViewHolder1) holder).tv_hot2.setText("￥" + data.getBestSellers().get(0).getGoodsList().get(position).getShop_price());
             ((MyViewHolder1) holder).tv_hot1.setText(data.getBestSellers().get(0).getGoodsList().get(position).getGoods_name());
             Picasso.with(context).load(data.getBestSellers().get(0).getGoodsList().get(position).getGoods_img()).into(((MyViewHolder1) holder).iv_hot1);
+            if (onItemClickListener != null) {
+                ((MyViewHolder1) holder).iv_hot1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int layoutPosition = holder.getLayoutPosition();
+                        onItemClickListener.OnItemClickListener(holder.itemView, layoutPosition);
+                    }
+                });
+            }
         } else if (holder instanceof MyViewHolder2) {
             ((MyViewHolder2) holder).iv_more.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, MemberActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("bean",data);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("bean", data);
                     intent.putExtras(bundle);
                     intent.putExtra("result", data.getBestSellers().get(0).getName());
                     context.startActivity(intent);

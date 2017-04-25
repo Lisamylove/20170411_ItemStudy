@@ -44,6 +44,7 @@ import xixinxin.bawie.com.studydemoyunifang.bean.ClassityBean;
 public class ClassityFragment extends Fragment {
 
     private RecyclerView rv_classity;
+    private ClassityBean.DataBean data;
     private List<ClassityBean.DataBean.GoodsBriefBean> goods;
     private String jsonurl = "http://m.yunifang.com/yunifang/mobile/category/list?random=96333&encode=bf3386e14fe5bb0bcef234baebca2414";
     Handler handler = new Handler() {
@@ -55,11 +56,12 @@ public class ClassityFragment extends Fragment {
                 String json = (String) msg.obj;
                 Gson gson = new Gson();
                 ClassityBean bean = gson.fromJson(json, ClassityBean.class);
+                data = bean.getData();
                 goods = bean.getData().getGoodsBrief();
                 Log.i("xxx", goods + "");
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 rv_classity.setLayoutManager(layoutManager);
-                rv_classity.setAdapter(new ClassityRecyclerViewAdapter(getActivity(),goods));
+                rv_classity.setAdapter(new ClassityRecyclerViewAdapter(getActivity(),data));
             }
         }
     };

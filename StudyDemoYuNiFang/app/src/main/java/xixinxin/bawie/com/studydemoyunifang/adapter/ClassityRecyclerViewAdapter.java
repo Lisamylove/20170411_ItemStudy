@@ -1,14 +1,17 @@
 package xixinxin.bawie.com.studydemoyunifang.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
 
 import xixinxin.bawie.com.studydemoyunifang.R;
+import xixinxin.bawie.com.studydemoyunifang.activity.ClassityActivity;
 import xixinxin.bawie.com.studydemoyunifang.bean.ClassityBean;
 
 /**
@@ -17,11 +20,11 @@ import xixinxin.bawie.com.studydemoyunifang.bean.ClassityBean;
  */
 public class ClassityRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private List<ClassityBean.DataBean.GoodsBriefBean> goods;
+    private ClassityBean.DataBean data;
 
-    public ClassityRecyclerViewAdapter(Context context, List<ClassityBean.DataBean.GoodsBriefBean> goods) {
+    public ClassityRecyclerViewAdapter(Context context, ClassityBean.DataBean data) {
         this.context = context;
-        this.goods = goods;
+        this.data = data;
     }
 
     @Override
@@ -46,9 +49,16 @@ public class ClassityRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         return null;
     }
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyViewHolder1) {
-
+//            ((MyViewHolder1) holder).iv_facial_mask.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent it=new Intent(context, ClassityActivity.class);
+//                    it.putExtra("id",data.getCategory().get(1).getChildren().get(6).getId());
+//                    context.startActivity(it);
+//                }
+//            });
         } else if (holder instanceof MyViewHolder2) {
 
         } else if (holder instanceof MyViewHolder3) {
@@ -56,7 +66,7 @@ public class ClassityRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
         } else if (holder instanceof MyViewHolder4) {
             GridLayoutManager drid = new GridLayoutManager(context, 2);
             ((MyViewHolder4) holder).rv_star.setLayoutManager(drid);
-            ((MyViewHolder4) holder).rv_star.setAdapter(new StarAdapter(context,goods));
+            ((MyViewHolder4) holder).rv_star.setAdapter(new StarAdapter(context,data));
         }
     }
 
@@ -82,8 +92,13 @@ public class ClassityRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
     public static class MyViewHolder1 extends RecyclerView.ViewHolder {
 
+        private final ImageView iv_facial_cleanser;
+        private final ImageView iv_facial_mask;
+
         public MyViewHolder1(View itemView) {
             super(itemView);
+            iv_facial_cleanser = (ImageView) itemView.findViewById(R.id.iv_facial_cleanser);
+            iv_facial_mask = (ImageView) itemView.findViewById(R.id.iv_facial_mask);
         }
     }
 

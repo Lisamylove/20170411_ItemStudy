@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //去头
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
         initView();//找控件
         sha = getSharedPreferences("congin", MODE_PRIVATE);
         boolean flag = sha.getBoolean("flag", false);

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import xixinxin.bawie.com.studydemoyunifang.R;
+import xixinxin.bawie.com.studydemoyunifang.activity.HomeActivity;
 
 /**
  * 1:姓名  席鑫鑫
@@ -33,9 +34,9 @@ public class ShoppingFragment extends Fragment {
         tv_shop_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fram,new FirstPageFragment());
-                transaction.commit();
+                Intent it=new Intent(getActivity(), HomeActivity.class);
+                startActivity(it);
+                getActivity().finish();
             }
         });
     }

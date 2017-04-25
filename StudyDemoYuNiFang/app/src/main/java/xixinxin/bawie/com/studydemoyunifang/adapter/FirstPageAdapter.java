@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import xixinxin.bawie.com.studydemoyunifang.R;
+import xixinxin.bawie.com.studydemoyunifang.activity.ParticularsActivity;
 import xixinxin.bawie.com.studydemoyunifang.activity.WebViewActivity;
 import xixinxin.bawie.com.studydemoyunifang.bean.FirstPageBean;
 
@@ -28,6 +29,7 @@ public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Context context;
     private FirstPageBean.DataBean data1;
     private Handler handler;
+    private Hotadapter hotadapter;
 
     public FirstPageAdapter(Context context, FirstPageBean.DataBean data1) {
         this.context = context;
@@ -96,7 +98,17 @@ public class FirstPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
             linearLayoutManager.setOrientation(linearLayoutManager.HORIZONTAL);
             ((MyVIewHolder2) holder).item2_recyclerView.setLayoutManager(linearLayoutManager);
-            ((MyVIewHolder2) holder).item2_recyclerView.setAdapter(new Hotadapter(context, data1));
+            hotadapter = new Hotadapter(context, data1);
+            ((MyVIewHolder2) holder).item2_recyclerView.setAdapter(hotadapter);
+            hotadapter.setOnItemClickListener(new Hotadapter.OnItemClickListener() {
+                @Override
+                public void OnItemClickListener(View view, int position) {
+                    Intent intent=new Intent(context, ParticularsActivity.class);
+                    intent.putExtra("id",data1.getBestSellers().get(0).getGoodsList().get(position).getId());
+                    context.startActivity(intent);
+                }
+            });
+
         } else if (holder instanceof MyVIewHolder3) {
             ((MyVIewHolder3) holder).tv_item2.setText("-- " + "优惠活动" + " --");
             ((MyVIewHolder3) holder).viewpager.setAdapter(new FavorableAdapter(context, data1));

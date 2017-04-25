@@ -1,5 +1,6 @@
 package xixinxin.bawie.com.studydemoyunifang.activity;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private RadioButton rb_first_page, rb_classity, rb_shopping, rb_user;
     private FrameLayout fram;
+    private SharedPreferences sha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //去头
+        if (getSupportActionBar()!=null){
+            getSupportActionBar().hide();
+        }
+//        sha = getSharedPreferences("config", MODE_PRIVATE);
+//        boolean flag = sha.getBoolean("flag", false);
         initView();//找控件
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fram, new FirstPageFragment(), "firstFragment");

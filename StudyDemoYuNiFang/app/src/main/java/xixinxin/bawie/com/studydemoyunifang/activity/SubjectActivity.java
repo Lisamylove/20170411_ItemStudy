@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
@@ -16,8 +17,9 @@ import xixinxin.bawie.com.studydemoyunifang.bean.FirstPageBean;
 public class SubjectActivity extends AppCompatActivity {
 
     private GridView gv_subject;
-    private  FirstPageBean.DataBean.SubjectsBean data;
+    private FirstPageBean.DataBean.SubjectsBean data;
     private TextView tv_subject_title, tv_subject_detail;
+    private ImageView iv_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,13 @@ public class SubjectActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        iv_back = (ImageView) findViewById(R.id.iv_back);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         tv_subject_detail = (TextView) findViewById(R.id.tv_subject_detail);
         tv_subject_title = (TextView) findViewById(R.id.tv_subject_title);
         gv_subject = (GridView) findViewById(R.id.gv_subject);
